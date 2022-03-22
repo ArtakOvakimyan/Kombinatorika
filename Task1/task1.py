@@ -16,8 +16,12 @@ def make_steps(point):
     return list(map(lambda x: tuple(map(lambda i, j: i + j, point, x)), moves))
 
 
-def point_is_valid(tup):
-    return 1 <= tup[0] <= 8 and 1 <= tup[1] <= 8
+def point_is_valid(point):
+    return 1 <= point[0] <= 8 and 1 <= point[1] <= 8
+
+
+def point_is_dangerous(point, pawn):
+    return point in [(pawn[0] - 1, pawn[1] - 1), (pawn[0] + 1, pawn[1] - 1)]
 
 
 def bfs(start, finish):
@@ -34,6 +38,9 @@ def bfs(start, finish):
         point = queue.get()
         if not point_is_valid(point):
             continue
+        if point_is_dangerous(point, finish) and point != start:
+            continue
+
         for step in make_steps(point):
             if step not in visited:
                 queue.put(step)
