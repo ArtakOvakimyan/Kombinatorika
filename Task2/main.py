@@ -44,7 +44,5 @@ def write(output_file, amount, comps):
 
 if __name__ == '__main__':
     c = count()
-    print(c)
     components = [k for k in comps if len(k) != 0]
-    print(components)
     write("out.txt", c, components)
