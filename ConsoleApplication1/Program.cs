@@ -5,9 +5,9 @@ using System.Text;
 
 namespace ConsoleApplication1
 {
-    
     class Program
     {
+        
         static void Main(string[] args)
         {
             string inPath = @"../../in.txt";
@@ -125,18 +125,18 @@ namespace ConsoleApplication1
             return GetPath(start, end, D, Next);
         }
 
-        private static (List<int> route, int weight) GetPath(int start, int end, int[] D, int[] Prev)
+        private static (List<int> route, int weight) GetPath(int start, int end, int[] D, int[] Next)
         {
             List<int> result = new List<int>();
             if (D[end] == -1)
                 return (null, 0);
 
             result.Add(end);
-            int u = Prev[end];
-            while (Prev[u] != 0)
+            int u = Next[end];
+            while (Next[u] != 0)
             {
                 result.Add(u);
-                u = Prev[u];
+                u = Next[u];
             }
             result.Add(start);
 
